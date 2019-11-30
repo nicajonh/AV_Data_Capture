@@ -26,44 +26,45 @@ try:
     option = ReadMediaWarehouse()
 except:
     print('[-]Config media_warehouse read failed!')
-title = ''        #标题
-studio = ''       #片商
-year = ''         #年份
-outline = ''      #简介
-runtime = ''      #运行时间
-director = ''     #导演
-actor_list = []   #演员列表
-actor = ''        #演员
-release = ''      #上市时间
-number = ''       #番号
-cover = ''        #封面URL
-imagecut = ''     #封面裁剪指数
-tag = []          #标签
-cn_sub = ''       #中文字幕
-c_word = ''       #中文字幕后缀
-multi_part = 0    #多集
-part = ''         #多集
-path = ''         #路径
-houzhui = ''      #后缀
-website = ''      #网站
-json_data = {}    #元数据集合
-actor_photo = {}  #演员图片URL
-cover_small = ''  #小封面链接
-naming_rule = ''  #元数据内标题命名规则
-location_rule = ''#位置规则
-program_mode = Config['common']['main_mode']               #运行模式
-failed_folder = Config['common']['failed_output_folder']   #失败输出目录
-success_folder = Config['common']['success_output_folder'] #成功输出目录
+title = ''  # 标题
+studio = ''  # 片商
+year = ''  # 年份
+outline = ''  # 简介
+runtime = ''  # 运行时间
+director = ''  # 导演
+actor_list = []  # 演员列表
+actor = ''  # 演员
+release = ''  # 上市时间
+number = ''  # 番号
+cover = ''  # 封面URL
+imagecut = ''  # 封面裁剪指数
+tag = []  # 标签
+cn_sub = ''  # 中文字幕
+c_word = ''  # 中文字幕后缀
+multi_part = 0  # 多集
+part = ''  # 多集
+path = ''  # 路径
+houzhui = ''  # 后缀
+website = ''  # 网站
+json_data = {}  # 元数据集合
+actor_photo = {}  # 演员图片URL
+cover_small = ''  # 小封面链接
+naming_rule = ''  # 元数据内标题命名规则
+location_rule = ''  # 位置规则
+program_mode = Config['common']['main_mode']  # 运行模式
+failed_folder = Config['common']['failed_output_folder']  # 失败输出目录
+success_folder = Config['common']['success_output_folder']  # 成功输出目录
 
 
 # =====================本地文件处理===========================
 
-def escapePath(path): # Remove escape literals
+def escapePath(path):  # Remove escape literals
     escapeLiterals = Config['escape']['literals']
     backslash = '\\'
     for literal in escapeLiterals:
-        path = path.replace(backslash+literal,'')
+        path = path.replace(backslash+literal, '')
     return path
+
 
 def moveFailedFolder():
     global filepath
@@ -85,7 +86,8 @@ def CreatFailedFolder():
         try:
             os.makedirs(failed_folder + '/')
         except:
-            print("[-]failed!can not be make Failed output folder\n[-](Please run as Administrator)")
+            print(
+                "[-]failed!can not be make Failed output folder\n[-](Please run as Administrator)")
             os._exit(0)
 
 
@@ -115,29 +117,32 @@ def getDataFromJSON(file_number):  # 从JSON返回元数据
 
     # ================================================网站规则添加开始================================================
 
-    if re.match('^\d{5,}', file_number):
+    if re.match('^\d{4,}', file_number):
         json_data = json.loads(avsox.main(file_number))
+        # file_number = file_number.replace('-', '_')
         if getDataState(json_data) == 0:  # 如果元数据获取失败，请求番号至其他网站抓取
             json_data = json.loads(javdb.main(file_number))
     # ==
-    elif re.match('\d+\D+', file_number):
+    elif re.match('\d+\D+-\d+', file_number):
         json_data = json.loads(siro.main(file_number))
         if getDataState(json_data) == 0:  # 如果元数据获取失败，请求番号至其他网站抓取
             json_data = json.loads(javbus.main(file_number))
         if getDataState(json_data) == 0:  # 如果元数据获取失败，请求番号至其他网站抓取
-            json_data = json.loads(javdb.main(file_number))
+            json_data = json.loads(javdb.main(file_number))	
     # ==
     elif 'fc2' in file_number or 'FC2' in file_number:
         json_data = json.loads(fc2fans_club.main(file_number))
     # ==
     elif 'HEYZO' in number or 'heyzo' in number or 'Heyzo' in number:
-        json_data = json.loads(avsox.main(file_number))
+        json_data = json.loads(javbus.main(file_number))
+        # json_data = json.loads(avsox.main(file_number))
     # ==
     elif 'siro' in file_number or 'SIRO' in file_number or 'Siro' in file_number:
         json_data = json.loads(siro.main(file_number))
     # ==
     else:
         json_data = json.loads(javbus.main(file_number))
+        # json_data = json.loads(javdb.main(file_number))
         if getDataState(json_data) == 0:  # 如果元数据获取失败，请求番号至其他网站抓取
             json_data = json.loads(avsox.main(file_number))
         elif getDataState(json_data) == 0:  # 如果元数据获取失败，请求番号至其他网站抓取

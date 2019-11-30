@@ -69,7 +69,7 @@ def getOutline(htmlcode):
     return result
 def main(number):
     try:
-        a = get_html('https://javdb.com/search?q=' + number + '&f=all').replace(u'\xa0', u' ')
+        a = get_html('https://javdb3.com/search?q=' + number + '&f=all').replace(u'\xa0', u' ')
         html = etree.fromstring(a, etree.HTMLParser())  # //table/tr[1]/td[1]/text()
         result1 = str(html.xpath('//*[@id="videos"]/div/div/a/@href')).strip(" ['']")
         b = get_html('https://javdb.com' + result1).replace(u'\xa0', u' ')
