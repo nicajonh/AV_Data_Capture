@@ -115,8 +115,12 @@ def getDirector(a):
 def getOutline(htmlcode):
     html = etree.fromstring(htmlcode, etree.HTMLParser())
     result = str(html.xpath(
-        '//*[@id="introduction"]/dd/p[1]/text()')).strip(" ['']")
-    return result
+        '//*[@id="introduction"]/dd/p[1]/text()'))
+    if result:
+        result = result.strip(" ['']")
+        return result
+    else:
+        return ''
 
 
 def main(number):
@@ -125,8 +129,13 @@ def main(number):
                      number + '&f=all').replace(u'\xa0', u' ')
         # //table/tr[1]/td[1]/text()
         html = etree.fromstring(a, etree.HTMLParser())
-        result1 = str(html.xpath(
-            '//*[@id="videos"]/div/div/a/@href')).strip(" ['']")
+        # result1 = str(html.xpath(
+        #    '//*[@id="videos"]/div/div/a/@href')).strip(" ['']")
+        xpath_rules = '//*[@id="videos"]/div/div/a/div[contains(text(),$number)]/parent::a/@href'
+        #xpath_rules = xpath_rules.format(number).extract_first()
+        # print(xpath_rules)
+        result1 = str(html.xpath(xpath_rules, number=number)).strip(" ['']")
+
         b = get_html('https://javdb3.com' + result1).replace(u'\xa0', u' ')
         dic = {
             'actor': getActor(b),
@@ -151,6 +160,7 @@ def main(number):
         }
         js = json.dumps(dic, ensure_ascii=False, sort_keys=True,
                         indent=4, separators=(',', ':'), )  # .encode('UTF-8')
+        # print(dic)
         return js
     except:
         a = get_html('https://javdb3.com/search?q=' +
@@ -182,11 +192,12 @@ def main(number):
             'website': 'https://javdb3.com' + result1,
             'source': 'javdb.py',
         }
+        # print(dic)
         js = json.dumps(dic, ensure_ascii=False, sort_keys=True,
                         indent=4, separators=(',', ':'), )  # .encode('UTF-8')
         return js
 
 
 # if __name__ == "__main__":
-#     main('LUXU-254')
+#     main('SIRO-2057')
 # print(get_html('https://javdb1.com/v/WwZ0Q'))

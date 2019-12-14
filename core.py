@@ -124,22 +124,17 @@ def getDataFromJSON(file_number):  # 从JSON返回元数据
         if getDataState(json_data) == 0:  # 如果元数据获取失败，请求番号至其他网站抓取
             json_data = json.loads(javdb.main(file_number))
     # ==
-    elif re.match('\d+\D+-\d+', file_number):
-        json_data = json.loads(siro.main(file_number))
-        if getDataState(json_data) == 0:  # 如果元数据获取失败，请求番号至其他网站抓取
-            json_data = json.loads(javbus.main(file_number))
-        if getDataState(json_data) == 0:  # 如果元数据获取失败，请求番号至其他网站抓取
-            json_data = json.loads(javdb.main(file_number))	
+    # elif re.match('\d+\D+-\d+', file_number):
+    #     json_data = json.loads(siro.main(file_number))
+    #     if getDataState(json_data) == 0:  # 如果元数据获取失败，请求番号至其他网站抓取
+    #         json_data = json.loads(javbus.main(file_number))
+    #     if getDataState(json_data) == 0:  # 如果元数据获取失败，请求番号至其他网站抓取
+    #         json_data = json.loads(javdb.main(file_number))	
     # ==
     elif 'fc2' in file_number or 'FC2' in file_number:
         json_data = json.loads(fc2fans_club.main(file_number))
     elif 'luxu' in file_number or 'LUXU' in file_number or 'Luxu' in file_number:
         json_data = json.loads(javdb.main(file_number))
-    # ==
-    elif 'HEYZO' in number or 'heyzo' in number or 'Heyzo' in number:
-        json_data = json.loads(javbus.main(file_number))
-        # json_data = json.loads(avsox.main(file_number))
-    # ==
     elif 'ara' in file_number or 'ARA' in file_number or 'Ara' in file_number:
         json_data = json.loads(javdb.main(file_number))
     elif 'gana' in file_number or 'GANA' in file_number or 'Gana' in file_number:
@@ -147,8 +142,12 @@ def getDataFromJSON(file_number):  # 从JSON返回元数据
     elif 'mium' in file_number or 'MIUM' in file_number or 'Mium' in file_number:
         json_data = json.loads(javdb.main(file_number))
     elif 'siro' in file_number or 'SIRO' in file_number or 'Siro' in file_number:
+        # json_data = json.loads(siro.main(file_number))
         json_data = json.loads(javdb.main(file_number))
-        #json_data = json.loads(siro.main(file_number))
+    # ==
+    elif 'HEYZO' in number or 'heyzo' in number or 'Heyzo' in number:
+        # json_data = json.loads(avsox.main(file_number))
+        json_data = json.loads(javbus.main(file_number))
     # ==
     else:
         json_data = json.loads(javbus.main(file_number))
