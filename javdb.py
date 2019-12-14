@@ -20,10 +20,6 @@ def getActor(a):  # //*[@id="center_column"]/div[2]/div[1]/div/table/tbody/tr[1]
     html = etree.fromstring(a, etree.HTMLParser())
     result1 = str(html.xpath(
         '//strong[contains(text(),"演員")]/../following-sibling::span/text()')).strip(" ['']")
-
-    result3 = str(html.xpath(
-        '//strong[contains(text(),"製作")]/../following-sibling::span/a/text()')).strip(" ['']")
-    print(result3)
     result2 = str(html.xpath(
         '//strong[contains(text(),"演員")]/../following-sibling::span/a/text()')).strip(" ['']")
     return str(result1 + result2).strip('+').replace(",\\xa0", "").replace("'", "").replace(' ', '').replace(',,', '').lstrip(',').replace(',', ', ')
