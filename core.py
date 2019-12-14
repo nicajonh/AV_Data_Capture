@@ -118,8 +118,9 @@ def getDataFromJSON(file_number):  # 从JSON返回元数据
     # ================================================网站规则添加开始================================================
 
     if re.match('^\d{4,}', file_number):
-        json_data = json.loads(avsox.main(file_number))
-        # file_number = file_number.replace('-', '_')
+        #json_data = json.loads(avsox.main(file_number))
+        json_data = json.loads(javbus.main(file_number))
+        #file_number = file_number.replace('-', '_')
         if getDataState(json_data) == 0:  # 如果元数据获取失败，请求番号至其他网站抓取
             json_data = json.loads(javdb.main(file_number))
     # ==
@@ -132,6 +133,8 @@ def getDataFromJSON(file_number):  # 从JSON返回元数据
     # ==
     elif 'fc2' in file_number or 'FC2' in file_number:
         json_data = json.loads(fc2fans_club.main(file_number))
+    elif 'luxu' in file_number or 'LUXU' in file_number:
+        json_data = json.loads(javdb.main(file_number))
     # ==
     elif 'HEYZO' in number or 'heyzo' in number or 'Heyzo' in number:
         json_data = json.loads(javbus.main(file_number))
@@ -142,7 +145,7 @@ def getDataFromJSON(file_number):  # 从JSON返回元数据
     # ==
     else:
         json_data = json.loads(javbus.main(file_number))
-        # json_data = json.loads(javdb.main(file_number))
+        #json_data = json.loads(javdb.main(file_number))
         if getDataState(json_data) == 0:  # 如果元数据获取失败，请求番号至其他网站抓取
             json_data = json.loads(avsox.main(file_number))
         elif getDataState(json_data) == 0:  # 如果元数据获取失败，请求番号至其他网站抓取
@@ -236,7 +239,7 @@ def smallCoverCheck():
 def creatFolder():  # 创建文件夹
     global actor
     global path
-    if len(os.getcwd() + path) > 240:  # 新建成功输出文件夹
+    if len(os.getcwd() + path) > 100:  # 新建成功输出文件夹
         path = success_folder+'/'+location_rule.replace("'actor'","'manypeople'",3).replace("actor","'manypeople'",3) #path为影片+元数据所在目录
     else:
         path = success_folder + '/' + location_rule
