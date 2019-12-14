@@ -153,7 +153,6 @@ def main(number):
             'website': 'https://javdb3.com' + result1,
             'source': 'javdb.py',
         }
-        print(dic)
         js = json.dumps(dic, ensure_ascii=False, sort_keys=True,
                         indent=4, separators=(',', ':'), )  # .encode('UTF-8')
         return js
@@ -187,12 +186,11 @@ def main(number):
             'website': 'https://javdb3.com' + result1,
             'source': 'javdb.py',
         }
-        print(dic)
         js = json.dumps(dic, ensure_ascii=False, sort_keys=True,
                         indent=4, separators=(',', ':'), )  # .encode('UTF-8')
         return js
 
 
-if __name__ == "__main__":
-    main('LUXU-254')
+# if __name__ == "__main__":
+#     main('LUXU-254')
 # print(get_html('https://javdb1.com/v/WwZ0Q'))
