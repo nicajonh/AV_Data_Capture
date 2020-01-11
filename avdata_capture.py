@@ -166,7 +166,7 @@ if __name__ == '__main__':
     print('[*]             Version '+version)
     print('[*]=====================================')
     CreatFailedFolder()
-    UpdateCheck()
+    #UpdateCheck()
     moveMovies()
     os.chdir(os.getcwd())
 

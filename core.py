@@ -146,8 +146,8 @@ def getDataFromJSON(file_number):  # 从JSON返回元数据
         json_data = json.loads(javdb.main(file_number))
     # ==
     elif 'HEYZO' in number or 'heyzo' in number or 'Heyzo' in number:
-        # json_data = json.loads(avsox.main(file_number))
-        json_data = json.loads(javbus.main(file_number))
+        json_data = json.loads(avsox.main(file_number))
+        # json_data = json.loads(javbus.main(file_number))
     # ==
     else:
         json_data = json.loads(javbus.main(file_number))
@@ -263,7 +263,11 @@ def creatFolder():  # 创建文件夹
 # =====================资源下载部分===========================
 def DownloadFileWithFilename(url, filename, path):  # path = examle:photo , video.in the Project Folder!
     try:
-        proxy = Config['proxy']['proxy']
+        proxyflag=Config['proxy']['proxy_enable']
+        proxy=''
+        if proxyflag==1:
+            proxy = Config['proxy']['proxy']
+
         timeout = int(Config['proxy']['timeout'])
         retry_count = int(Config['proxy']['retry'])
     except:
@@ -272,15 +276,14 @@ def DownloadFileWithFilename(url, filename, path):  # path = examle:photo , vide
 
     while i < retry_count:
         try:
-            if not proxy == '':
+            if proxy != '':
                 if not os.path.exists(path):
                     os.makedirs(path)
                 headers = {
                     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36'}
                 r = requests.get(url, headers=headers, timeout=timeout,
-                                 proxies={"http": "http://" + str(proxy), "https": "https://" + str(proxy)})
+                                proxies={"http": "http://" + str(proxy), "https": "https://" + str(proxy)},verify=False)
                 if r == '':
-                    print('[-]Movie Data not found!')
                     os._exit(0)
                 with open(str(path) + "/" + filename, "wb") as code:
                     code.write(r.content)
@@ -290,9 +293,8 @@ def DownloadFileWithFilename(url, filename, path):  # path = examle:photo , vide
                     os.makedirs(path)
                 headers = {
                     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36'}
-                r = requests.get(url, timeout=timeout, headers=headers)
+                r = requests.get(url, timeout=timeout, headers=headers,verify=False)
                 if r == '':
-                    print('[-]Movie Data not found!')
                     os._exit(0)
                 with open(str(path) + "/" + filename, "wb") as code:
                     code.write(r.content)
