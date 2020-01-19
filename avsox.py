@@ -4,6 +4,8 @@ import json
 from bs4 import BeautifulSoup
 from ADC_function import *
 
+WEB_ADDR='https://avsox.host/cn/search/'
+
 def getActorPhoto(htmlcode): #//*[@id="star_qdt"]/li/a/img
     soup = BeautifulSoup(htmlcode, 'lxml')
     a = soup.find_all(attrs={'class': 'avatar-box'})
@@ -71,16 +73,16 @@ def getTag(a):  # 获取演员
     return d
 
 def main(number):
-    a = get_html('https://avsox.asia/cn/search/' + number)
+    a = get_html(WEB_ADDR + number)
     html = etree.fromstring(a, etree.HTMLParser())  # //table/tr[1]/td[1]/text()
     result1 = str(html.xpath('//*[@id="waterfall"]/div/a/@href')).strip(" ['']")
     if result1 == '' or result1 == 'null' or result1 == 'None':
-        a = get_html('https://avsox.asia/cn/search/' + number.replace('-', '_'))
+        a = get_html(WEB_ADDR + number.replace('-', '_'))
         print(a)
         html = etree.fromstring(a, etree.HTMLParser())  # //table/tr[1]/td[1]/text()
         result1 = str(html.xpath('//*[@id="waterfall"]/div/a/@href')).strip(" ['']")
         if result1 == '' or result1 == 'null' or result1 == 'None':
-            a = get_html('https://avsox.asia/cn/search/' + number.replace('_', ''))
+            a = get_html(WEB_ADDR + number.replace('_', ''))
             print(a)
             html = etree.fromstring(a, etree.HTMLParser())  # //table/tr[1]/td[1]/text()
             result1 = str(html.xpath('//*[@id="waterfall"]/div/a/@href')).strip(" ['']")

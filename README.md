@@ -1,4 +1,4 @@
-# Movies Data Capture
+# AV Data Capture
 
 
 <a title="Hits" target="_blank" href="https://github.com/yoshiko2/AV_Data_Capture"><img src="https://hits.b3log.org/yoshiko2/AV_Data_Capture.svg"></a>
@@ -10,7 +10,7 @@
 [![HitCount](http://hits.dwyl.io/yoshiko2/av_data_capture.svg)](http://hits.dwyl.io/yoshiko2/av_data_capture)
 
 
-**电影元数据 抓取工具 | 刮削器**，配合本地影片管理软件EMBY,KODI等管理本地影片，该软件起到分类与元数据抓取作用，利用元数据信息来分类，供本地影片分类整理使用。
+**日本电影元数据 抓取工具 | 刮削器**，配合本地影片管理软件EMBY,KODI等管理本地影片，该软件起到分类与元数据抓取作用，利用元数据信息来分类，供本地影片分类整理使用。
 
 # 目录
 * [声明](#声明)
@@ -43,6 +43,8 @@
 **若用户不同意上述条款任意一条，请勿使用该软件**<br>
 
 # FAQ
+### 这软件能下片吗？
+* 该软件不提供任何影片下载地址，仅供本地影片分类整理使用。
 ### 什么是元数据？
 * 元数据包括了影片的：封面，导演，演员，简介，类型......
 ### 软件收费吗？
@@ -50,7 +52,8 @@
 ### 软件运行异常怎么办？
 * 认真看 [异常处理（重要）](#5异常处理重要)
 
-
+# 故事
+[点击跳转至作者博客文章](https://yoshiko2.github.io/2019/10/18/AVDC/)
 
 # 效果图
 **图片来自网络**，由于相关法律法规，具体效果请自行联想

@@ -141,7 +141,12 @@ def getDataFromJSON(file_number):  # 从JSON返回元数据
         json_data = json.loads(javdb.main(file_number))
     elif 'mium' in file_number or 'MIUM' in file_number or 'Mium' in file_number:
         json_data = json.loads(javdb.main(file_number))
+    elif 'fc2' in file_number or 'Fc2' in file_number or 'FC2' in file_number:
+        json_data = json.loads(javdb.main(file_number))
     elif 'siro' in file_number or 'SIRO' in file_number or 'Siro' in file_number:
+        # json_data = json.loads(siro.main(file_number))
+        json_data = json.loads(javdb.main(file_number))
+    elif 'ntk' in file_number or 'NTK' in file_number or 'Ntk' in file_number:
         # json_data = json.loads(siro.main(file_number))
         json_data = json.loads(javdb.main(file_number))
     # ==
