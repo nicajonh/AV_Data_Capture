@@ -122,7 +122,7 @@ def getDataFromJSON(file_number):  # 从JSON返回元数据
         json_data = json.loads(javbus.main(file_number))
         #file_number = file_number.replace('-', '_')
         if getDataState(json_data) == 0:  # 如果元数据获取失败，请求番号至其他网站抓取
-            json_data = json.loads(javdb.main(file_number))
+            json_data = json.loads(avsox.main(file_number)) or json.loads(javdb.main(file_number))
     # ==
     # elif re.match('\d+\D+-\d+', file_number):
     #     json_data = json.loads(siro.main(file_number))
@@ -158,9 +158,7 @@ def getDataFromJSON(file_number):  # 从JSON返回元数据
         json_data = json.loads(javbus.main(file_number))
         #json_data = json.loads(javdb.main(file_number))
         if getDataState(json_data) == 0:  # 如果元数据获取失败，请求番号至其他网站抓取
-            json_data = json.loads(avsox.main(file_number))
-        elif getDataState(json_data) == 0:  # 如果元数据获取失败，请求番号至其他网站抓取
-            json_data = json.loads(javdb.main(file_number))
+            json_data = json.loads(avsox.main(file_number)) or json.loads(javdb.main(file_number))
 
     # ================================================网站规则添加结束================================================
 
