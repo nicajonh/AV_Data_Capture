@@ -4,6 +4,11 @@ import json
 from bs4 import BeautifulSoup
 from ADC_function import *
 
+from requests.packages.urllib3.exceptions import InsecureRequestWarning
+ 
+requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
+
+WEB_ADDR='https://javdb.com'
 
 def getTitle(a):
     try:
@@ -125,7 +130,7 @@ def getOutline(htmlcode):
 
 def main(number):
     try:
-        a = get_html('https://javdb3.com/search?q=' +
+        a = get_html(WEB_ADDR+'/search?q=' +
                      number + '&f=all').replace(u'\xa0', u' ')
         # //table/tr[1]/td[1]/text()
         html = etree.fromstring(a, etree.HTMLParser())
@@ -136,7 +141,7 @@ def main(number):
         # print(xpath_rules)
         result1 = str(html.xpath(xpath_rules, number=number)).strip(" ['']")
 
-        b = get_html('https://javdb3.com' + result1).replace(u'\xa0', u' ')
+        b = get_html(WEB_ADDR + result1).replace(u'\xa0', u' ')
         dic = {
             'actor': getActor(b),
             'title': getTitle(b).replace("\\n", '').replace('        ', '').replace(getActor(a), '').replace(getNum(a),
@@ -155,7 +160,7 @@ def main(number):
             # str(re.search('\d{4}',getRelease(a)).group()),
             'year': getYear(getRelease(b)),
             'actor_photo': '',
-            'website': 'https://javdb3.com' + result1,
+            'website': WEB_ADDR + result1,
             'source': 'javdb.py',
         }
         js = json.dumps(dic, ensure_ascii=False, sort_keys=True,
@@ -163,13 +168,13 @@ def main(number):
         # print(dic)
         return js
     except:
-        a = get_html('https://javdb3.com/search?q=' +
+        a = get_html(WEB_ADDR+'/search?q=' +
                      number + '&f=all').replace(u'\xa0', u' ')
         # //table/tr[1]/td[1]/text()
         html = etree.fromstring(a, etree.HTMLParser())
         result1 = str(html.xpath(
             '//*[@id="videos"]/div/div/a/@href')).strip(" ['']")
-        b = get_html('https://javdb3.com' + result1).replace(u'\xa0', u' ')
+        b = get_html(WEB_ADDR + result1).replace(u'\xa0', u' ')
         dic = {
             'actor': getActor(b),
             'title': getTitle(b).replace("\\n", '').replace('        ', '').replace(getActor(a), '').replace(
@@ -189,7 +194,7 @@ def main(number):
             # str(re.search('\d{4}',getRelease(a)).group()),
             'year': getYear(getRelease(b)),
             'actor_photo': '',
-            'website': 'https://javdb3.com' + result1,
+            'website': WEB_ADDR + result1,
             'source': 'javdb.py',
         }
         # print(dic)

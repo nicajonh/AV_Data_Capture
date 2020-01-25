@@ -3,6 +3,9 @@ from lxml import etree
 import json
 from bs4 import BeautifulSoup
 from ADC_function import *
+from requests.packages.urllib3.exceptions import InsecureRequestWarning
+ 
+requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 def getTitle(a):
     try:

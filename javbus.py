@@ -4,6 +4,9 @@ from lxml import etree  # need install
 from bs4 import BeautifulSoup  # need install
 import json
 from ADC_function import *
+from requests.packages.urllib3.exceptions import InsecureRequestWarning
+ 
+requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 JAVBUS_ADDREDSS = 'https://www.dmmbus.icu/'
 

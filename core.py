@@ -131,8 +131,6 @@ def getDataFromJSON(file_number):  # 从JSON返回元数据
     #     if getDataState(json_data) == 0:  # 如果元数据获取失败，请求番号至其他网站抓取
     #         json_data = json.loads(javdb.main(file_number))	
     # ==
-    elif 'fc2' in file_number or 'FC2' in file_number:
-        json_data = json.loads(fc2fans_club.main(file_number))
     elif 'luxu' in file_number or 'LUXU' in file_number or 'Luxu' in file_number:
         json_data = json.loads(javdb.main(file_number))
     elif 'ara' in file_number or 'ARA' in file_number or 'Ara' in file_number:
